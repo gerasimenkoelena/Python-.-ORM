@@ -83,10 +83,13 @@ for record in data:
     session.add(model(id=record.get('pk'), **record.get('fields')))
 session.commit()
 
+
+
 publisher_input = input('Enter publisher name or id:  ')
 
-if isinstance(publisher_input, int):
+if publisher_input.isdigit():
     # Если это целое число, считаем, что это идентификатор
+    publisher_input = int(publisher_input)
     results = session.query(
         Book.title.label('book_title'),
         Shop.name.label('shop_name'),
